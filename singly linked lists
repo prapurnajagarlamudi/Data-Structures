@@ -7,6 +7,8 @@ struct node
 }*newnode,*temp;
 struct node* head=NULL;
 struct node* tail=NULL;
+
+// creation of a single linked list
 void create ()
 {
     char ch;
@@ -33,18 +35,19 @@ void create ()
     }
     while(ch == 'c');
 }
+
+// display of a single linked list
 void display()
 {
-    int count=0;
     temp=head;
     while(temp!=NULL)
     {
     printf("%d\n",temp->data);
     temp=temp->next;
-    count=count+1;
     }
 }
 
+// insertion at the beginning 
 void insert_beg ()
 {
     int value;
@@ -56,6 +59,7 @@ void insert_beg ()
     head=newnode;
 }
 
+// insertion at the specified position
 void insert_pos ()
 {
     int pos,value,i=0;
@@ -75,6 +79,7 @@ void insert_pos ()
     temp->next=newnode;
 }
 
+// insertion at the end
 void insert_end ()
 {
     int value;
@@ -87,6 +92,7 @@ void insert_end ()
     tail=newnode;
 }
 
+// deletion at the beginning
 void delete_beg ()
 {
     temp=head;
@@ -94,6 +100,7 @@ void delete_beg ()
     temp->next=NULL;
 }
 
+// deletion at the end
 void delete_end ()
 {
     temp=head;
@@ -105,6 +112,7 @@ void delete_end ()
     tail=temp;
 }
 
+// deletion at the specified position 
 void delete_pos ()
 {
     int pos,i=0;
@@ -117,6 +125,36 @@ void delete_pos ()
         i=i+1;
     }
     temp->next=temp->next->next;
+}
+
+// reverse of a list
+void reverse ()
+{
+    struct node* prevnode=NULL;
+    struct node* currentnode=head;
+    struct node* nextnode=head;
+    while(nextnode!=NULL)
+    {
+        nextnode=nextnode->next;
+        currentnode->next=prevnode;
+        prevnode=currentnode;
+        currentnode=nextnode;
+    }
+    head=prevnode;
+}
+
+// to count the elements in a list
+void count ()
+{
+    int c=0;
+    temp=head;
+    while(temp!=NULL)
+    {
+    printf("%d\n",temp->data);
+    temp=temp->next;
+    c++;
+    }
+    printf("Number of elements is %d",c); 
 }
 
 void main ()
@@ -174,5 +212,17 @@ void main ()
     display();
     delete_end();
     display();
+    }
+    if (choice==9)
+    {
+    create();
+    display();
+    reverse();
+    display();
+    }
+    if (choice==10)
+    {
+    create();
+    count();
     }
 }
