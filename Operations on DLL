@@ -1,0 +1,226 @@
+// double linked list 
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+        int data;
+        struct node *prev;
+        struct node *next;
+}*newnode,*temp,*head=NULL,*tail=NULL,*temp1;
+
+void create ()
+{
+        char ch;
+        do
+        {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter ther data");
+        scanf("%d",&newnode->data);
+        newnode->prev=NULL;
+        newnode->next=NULL;
+        if(head==NULL)
+        {
+                head=newnode;
+                                tail=newnode;
+        }
+        else
+        {
+                tail->next=newnode;
+                newnode->prev=tail;
+                tail=newnode;
+        }
+        printf("Enter c-continue and e-exit");
+        scanf(" %c",&ch);
+        }
+        while(ch =='c');
+
+}
+void display()
+{
+        temp=head;
+        while(temp->next!=NULL)
+                {
+                printf("%d\n",temp->data);
+                temp=temp->next;
+        }
+        printf("%d\n",temp->data);
+}
+void insert_beg()
+{
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data to insert");
+        scanf("%d",&newnode->data);
+        newnode->next=head;
+        newnode->prev=NULL;
+        head->prev=newnode;
+        head=newnode;
+}
+void insert_end()
+{
+            newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data to insert");
+        scanf("%d",&newnode->data);
+        newnode->next=NULL;
+        newnode->prev=tail;
+        tail->next=newnode;
+        tail=newnode;
+}
+void insert_pos ()
+{
+        int pos,i=0;
+        printf("enter the position");
+        scanf("%d",&pos);
+        temp=head;
+        while(i<pos-1)
+        {
+                temp=temp->next;
+                                i++;
+        }
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data to insert");
+        scanf("%d",&newnode->data);
+        newnode->prev=temp;
+        temp->next->prev=newnode;
+        newnode->next=temp->next;
+        temp->next=newnode;
+}
+void delete_beg()
+{
+        temp=head;
+        head=head->next;
+        temp->next=NULL;
+        head->prev=NULL;
+}
+void delete_end ()
+{
+        temp=tail;
+        tail=tail->prev;
+        temp->prev=NULL;
+        tail->next=NULL;
+}
+void delete_pos()
+{
+        int pos,i=0;
+        printf("Enter the position to delete");
+        scanf("%d",&pos);
+        temp=head;
+        while(i<pos-1)
+        {
+                temp=temp->next;
+                i++;
+        }
+        temp1=temp->next;
+                temp1=temp->next;
+        temp->next=temp1->next;
+        temp->next->prev=temp;
+        temp1->prev=NULL;
+        temp1->next=NULL;
+}
+void count()
+{
+        int c=0;
+        temp=head;
+        while(temp->next!=NULL)
+        {
+                printf("%d\n",temp->data);
+                c=c+1;
+                temp=temp->next;
+        }
+        printf("%d\n",temp->data);
+        c=c+1;
+                printf("count is %d\n",c);
+}
+void reverse()
+{
+        temp=tail;
+        while(temp->prev!=NULL)
+        {
+                printf("%d",temp->data);
+                temp=temp->prev;
+        }
+        printf("%d",temp->data);
+}
+void main ()
+{
+    int choice;
+    printf("1-creation\n2display\n3-insert beg\n4-insert end\n5-insert pos\n6-delete beg\n7-delete end\n8-delete pos\n9-reverse\n10-count\n");
+    printf("enter the choice");
+    scanf("%d",&choice);
+    if (choice==1)
+    {
+    create();
+    }
+    if (choice==2)
+    {
+    create();
+    display();
+    }
+    if (choice==3)
+    {
+    create();
+    printf("Before insertion\n");
+    display();
+    insert_beg();
+    printf("After insertion\n");
+    display();
+    }
+    if (choice==4)
+    {
+    create();
+    printf("Before insertion\n");
+    display();
+    insert_pos();
+    printf("After insertion\n");
+    display();
+    }
+    if (choice==5)
+    {
+    create();
+    printf("Before insertion\n");
+    display();
+    insert_end();
+    printf("After insertion\n");
+    display();
+    }
+    if (choice==6)
+    {
+    create();
+    printf("Before deletion\n");
+    display();
+    delete_beg();
+    printf("After deletion\n");
+    display();
+    }
+    if (choice==7)
+    {
+    create();
+    printf("Before deletion\n");
+    display();
+    delete_pos();
+    printf("After deletion\n");
+    display();
+    }
+    if (choice==8)
+    {
+    create();
+    printf("Before deletion\n");
+    display();
+    delete_end();
+    printf("After deletion\n");
+    display();
+    }
+    if (choice==9)
+    {
+    create();
+    printf("Before reverse\n");
+    display();
+    reverse();
+    printf("After reverse\n");
+    display();
+    }
+    if (choice==10)
+    {
+    create();
+    count();
+    }
+}
