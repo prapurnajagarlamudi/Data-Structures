@@ -160,6 +160,7 @@ void count ()
 void main ()
 {
     int choice;
+    printf("1-creation\n2display\n3-insert beg\n4-insert end\n5-insert pos\n6-delete beg\n7-delete end\n8-delete pos\n9-reverse\n10-count\n");
     printf("enter the choice");
     scanf("%d",&choice);
     if (choice==1)
@@ -174,50 +175,64 @@ void main ()
     if (choice==3)
     {
     create();
+    printf("Before insertion\n");
     display();
     insert_beg();
+    printf("After insertion\n");
     display();
     }
     if (choice==4)
     {
     create();
+    printf("Before insertion\n");
     display();
     insert_pos();
+    printf("After insertion\n");
     display();
     }
     if (choice==5)
     {
     create();
+    printf("Before insertion\n");
     display();
     insert_end();
+    printf("After insertion\n");
     display();
     }
     if (choice==6)
     {
     create();
+    printf("Before deletion\n");
     display();
     delete_beg();
+    printf("After deletion\n");
     display();
     }
     if (choice==7)
     {
     create();
+    printf("Before deletion\n");
     display();
     delete_pos();
+    printf("After deletion\n");
     display();
     }
     if (choice==8)
     {
     create();
+    printf("Before deletion\n");
     display();
     delete_end();
+    printf("After deletion\n");
     display();
     }
     if (choice==9)
     {
     create();
+    printf("Before reverse\n");
     display();
     reverse();
+    printf("After reverse\n");
     display();
     }
     if (choice==10)
