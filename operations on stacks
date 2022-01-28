@@ -168,9 +168,6 @@ void pop()
     }
     else
     {
-        int ele;
-        stack[top]=ele;
-        printf("Element popped is %d\n",ele);
         top--;
     }
 }
