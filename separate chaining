@@ -1,0 +1,155 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define size 13
+struct node
+{
+    int data;
+    struct node *next;
+}*newnode;
+struct node *chain[size];
+void init()
+{
+    int i;
+    for(i=0;i<size;i++)
+    {
+        chain[i]=NULL;
+    }
+}
+void insert()
+{
+    int ch,value;
+    do{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value to insert:\n");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=NULL;
+    int key=value%size;
+    if(chain[key]==NULL)
+    {
+        chain[key]=newnode;
+    }
+    else
+    {
+        struct node *temp=chain[key];
+        while(temp->next)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+    }
+    printf("enter 1 to continue and others to exit()\n");
+    scanf("%d",&ch);
+    }while(ch==1);
+}
+void print()
+{
+    int i;
+    for(i=0;i<size;i++)
+    {
+        struct node *temp=chain[i];
+        printf("chain[%d]-->",i);
+        while(temp)
+        {
+            printf("%d-->",temp->data);
+            temp=temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+int search(int value)
+{
+    int key=value%size;
+    struct node *temp=chain[key];
+    while(temp)
+    {
+        if(temp->data==value)
+        {
+            return 1;
+        }
+        temp=temp->data;
+    }
+    return 0;
+}
+int delete(int value)
+{
+    int key=value%size;
+    struct node *temp=chain[key],*dealloc;
+    if(temp!=NULL)
+    {
+        if(temp->data==value)
+        {
+            dealloc=temp;
+            temp=temp->next;
+            free(dealloc);
+            return 1;
+        }
+        else
+        {
+            while(temp->next)
+            {
+                if(temp->next->data==value)
+                {
+                    dealloc=temp->next;
+                    temp->next=temp->next->next;
+                    free(dealloc);
+                    return 1;
+                }
+                temp=temp->next;
+            }
+        }
+    }
+}
+int main()
+{
+    init();
+    insert();
+    print();
+    if(search(19))
+    {
+        printf("search found\n");
+    }
+    else
+    {
+        printf("search not found\n");
+    }
+    if(delete(10))
+    {
+        printf("After deletion of 10\n");
+        print();
+    }
+    else
+    {
+        printf("value not present\n");
+    }
+}
+
+output:
+1
+enter value to insert:
+22
+enter 1 to continue and others to exit()
+1
+enter value to insert:
+32
+enter 1 to continue and others to exit()
+1
+enter value to insert:
+42
+enter 1 to continue and others to exit()
+0
+chain[0]-->NULL
+chain[1]-->NULL
+chain[2]-->NULL
+chain[3]-->42-->NULL
+chain[4]-->NULL
+chain[5]-->NULL
+chain[6]-->32-->NULL
+chain[7]-->NULL
+chain[8]-->NULL
+chain[9]-->22-->NULL
+chain[10]-->NULL
+chain[11]-->NULL
+chain[12]-->12-->NULL
+search not found
+value not present
