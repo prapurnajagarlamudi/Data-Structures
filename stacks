@@ -1,0 +1,214 @@
+//operations on stack using SLL
+//last in first out
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+}*newnode,*temp,*top=NULL;
+
+void push()
+{
+    int data;
+    printf("Enter the data to insert");
+    scanf("%d",&data);
+    if(top==NULL)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        newnode->data=data;
+        newnode->next=NULL;
+        top=newnode;
+    }
+    else
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        newnode->data=data;
+        newnode->next=top;
+        top=newnode;
+    }
+    printf("Item is pushed\n");
+}
+
+void pop()
+{
+    if(top==NULL)
+    {
+        printf("Underflow\n");
+    }
+    else
+    {
+        temp=top;
+        top=top->next;
+        temp->next=NULL;
+    }
+    printf("Item is poped\n");
+}
+
+void display()
+{
+    if(top==NULL)
+    {
+        printf("Stack is empty\n");
+    }
+    else
+    {
+        printf("Elements in the stack are:\n");
+        temp=top;
+        while(temp!=NULL)
+        {
+            printf("%d\n",temp->data);
+            temp=temp->next;
+        }
+    }
+}
+
+void main()
+{
+    int choice=0;
+    while(choice!=4)
+    {
+        printf("1-push\n2-pop\n3-display\n");
+        printf("Enter choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1 : push();
+                     break;
+            case 2 : pop();
+                     break;
+            case 3 : display();
+                     break;
+            default : printf("Enter valid choice");
+        }
+    }
+}
+oitput:
+1-push
+2-pop
+3-display
+Enter choice1
+Enter the data to insert12
+Item is pushed
+1-push
+2-pop
+3-display
+Enter choice1
+Enter the data to insert22
+Item is pushed
+1-push
+2-pop
+3-display
+Enter choice1
+Enter the data to insert32
+Item is pushed
+1-push
+2-pop
+3-display
+Enter choice2
+Item is poped
+1-push
+2-pop
+3-display
+Enter choice3
+Elements in the stack are:
+22
+12
+
+
+
+//operations on stack using arrays
+//last in first out
+#include<stdio.h>
+#include<stdlib.h>
+#define size 4
+int top=-1,stack[size];
+void main()
+{
+    int choice,top=0;
+    while(choice!=3)
+    {
+        printf("1-push\n2-pop\n3-display\n");
+        printf("Enter choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: push();
+                    break;
+            case 2: pop();
+                    break;
+            case 3: display();
+                    break;
+            default: printf("Enter valid choice\n");
+        }
+    }
+}
+
+void push()
+{
+    if(top==size-1)
+    {
+        printf("overflow");
+    }
+    else
+    {
+        int ele;
+        printf("Enter the element\n");
+        scanf("%d",&ele);
+        top++;
+        stack[top]=ele;
+    }
+}
+
+void pop()
+{
+    if(top==-1)
+    {
+        printf("Underflow\n");
+    }
+    else
+    {
+        int ele;
+        stack[top]=ele;
+        printf("Element popped is %d\n",ele);
+        top--;
+    }
+}
+
+void display()
+{
+    printf("Elements in the stack are:\n");
+    for(top=0;top<size;top++)
+    {
+        printf("%d\n",stack[top]);
+    }
+}
+output:
+Enter choice1
+Enter the element
+12
+1-push
+2-pop
+3-display
+Enter choice1
+Enter the element
+22
+1-push
+2-pop
+3-display
+Enter choice1
+Enter the element
+32
+1-push
+2-pop
+3-display
+Enter choice2
+1-push
+2-pop
+3-display
+Enter choice3
+Elements in the stack are:
+12
+22
+0
+0
