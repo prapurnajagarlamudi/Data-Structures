@@ -1,0 +1,195 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+#define size 10
+int top=-1;
+char stack[size];
+void push(char item)
+{
+    if(top>=size-1)
+    {
+        printf("stack overflow\n");
+    }
+    else
+    {
+        top++;
+        stack[top]=item;
+    }
+}
+
+char pop()
+{
+    char item;
+    if(top<0)
+    {
+        printf("Stack underflow\n");
+        exit(1); //
+    }
+    else
+    {
+        item=stack[top];
+        top--;
+        return item;
+    }
+}
+
+int is_operator(char op)
+{
+    if(op=='^' || op=='%' || op=='*' || op=='/'  || op=='+' || op=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int precedence(char op)
+{
+    if(op == '^' || op == '%')
+    {
+        return 3;
+    }
+    else if(op=='*' || op=='/')
+    {
+        return 2;
+    }
+    else if(op=='+' || op=='-')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void infix_postfix(char infix[],char postfix[])
+{
+    int i=0,j=0;
+    char x,item;
+    push('(');
+    strcat(infix,")");
+    item=infix[i];
+    while(item!='\0')
+    {
+        if(item=='(')
+        {
+            push(item);
+        }
+        else if(isdigit(item) || isalpha(item))
+        {
+            postfix[j]=item;
+            j++;
+        }
+        else if(is_operator(item)==1)
+        {
+            x=pop();
+            while(is_operator(x)==1 && precedence(x)>=precedence(item))
+            {
+                postfix[j]=x;
+                j++;
+                x=pop();
+            }
+            push(x);
+            push(item);
+        }
+        else if(item==')')
+        {
+            x=pop();
+            while(x!='(')
+            {
+                postfix[j]=x;
+                j++;
+                x=pop();
+            }
+        }
+        else
+        {
+            //printf("Enter correct expression");
+            printf("enter crt expression\n");
+                                exit(1);
+        }
+        i++;
+        item=infix[i];
+    }
+    postfix[j]='\0';
+}
+
+void reverse(char infix[],char t[])
+{
+    int p=0,q=0;
+    while(infix[p]!='\0')
+    {
+        p++;
+    }
+    p--;
+    while(p>=0)
+    {
+        if(infix[p]==')')
+        {
+            t[q]='(';
+            p--;
+            q++;
+        }
+        else if(infix[p]=='(')
+        {
+            t[q]=')';
+            p--;
+            q++;
+        }
+        else
+        {
+            t[q]=infix[p];
+            p--;
+            q++;
+        }
+    }
+    t[q++]='\0';
+}
+
+void main()
+{
+    char infix[size],postfix[size],t[size],prefix[size];
+    printf("Enter the infix expression:\n");
+    gets(infix);
+    int choice;
+    printf("Enter the choice");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+        case 1:
+                infix_postfix(infix,postfix);
+                printf("infix expression is:\n(");
+                puts(infix);
+                printf("postfix expression is:\n");
+                puts(postfix);
+                break;
+        case 2: reverse(infix,t);
+                infix_postfix(t,postfix);
+                reverse(postfix,prefix);
+                printf("infix expression is:\n");
+                puts(infix);
+                printf("prefix expression is:\n");
+                puts(prefix);
+                break;
+    }
+}
+output:
+Enter the infix expression:
+a*b+c
+Enter the choice1
+infix expression is:
+(a*b+c)
+postfix expression is:
+ab*c+
+
+Enter the infix expression:
+a*b+c
+Enter the choice2
+infix expression is:
+a*b+c
+prefix expression is:
++*abc
