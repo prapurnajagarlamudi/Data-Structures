@@ -1,0 +1,180 @@
+//operations on linear/simple queue using arrays
+#include<stdio.h>
+#include<stdlib.h>
+#define size 10
+int rear=0,front=0;
+int queue[size];
+void enqueue()
+{
+    int item;
+    if(rear==size)
+    {
+        printf("Queue is empty");
+    }
+    else
+    {
+        printf("Enter the element");
+        scanf("%d",&item);
+        queue[rear]=item;
+        rear++;
+    }
+}
+
+void dequeue()
+{
+    int ele;
+    if(rear==front)
+    {
+        printf("Queue is empty");
+    }
+    else
+    {
+        ele=queue[front];
+        front++;
+    }
+}
+
+void display()
+{
+    if(rear==front)
+    {
+        printf("Queue is empty");
+    }
+    else
+    {
+        for(int i=rear;i>=front;i--)
+        {
+            printf("%d\n",queue[i]);
+        }
+    }
+}
+
+void main ()
+{
+    int choice=0;
+    while(choice!=3)
+    {
+        printf("Enter the choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: enqueue();
+                    break;
+            case 2: dequeue();
+                    break;
+            case 3: display();
+                    break;
+            default : printf("Enter valid choice");
+        }
+    }
+}
+
+output:
+Enter the choice1
+Enter the element12
+Enter the choice1
+Enter the element22
+Enter the choice1
+Enter the element21
+Enter the choice2
+Enter the choice3
+0
+21
+22
+
+//operations on linear/simple queue using SLL
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node* next;
+}*newnode,*temp,*rear=NULL,*front=NULL;
+
+void enqueue()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the value");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=NULL;
+    if(rear==NULL)
+    {
+        rear=front=newnode;
+    }
+    else
+    {
+        rear->next=newnode;
+        rear=newnode;
+    }
+}
+
+void dequeue()
+{
+    if(rear==NULL && front==NULL)
+    {
+        printf("Empty");
+    }
+    else
+    {
+        temp=front;
+        front=front->next;
+        temp->next=NULL;
+    }
+}
+
+void display()
+{
+    temp=front;
+    if(rear==NULL && front==NULL)
+    {
+        printf("Queue is empty");
+    }
+    else
+    {
+        printf("Elements in the queue are:\n");
+        while(temp!=NULL)
+        {
+            printf("%d\n",temp->data);
+            temp=temp->next;
+        }
+    }
+}
+
+void main ()
+{
+    int choice=0;
+    while(choice!=3)
+    {
+        printf("Enter the choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: enqueue();
+                    break;
+            case 2: dequeue();
+                    break;
+            case 3: display();
+                    break;
+            default : printf("Enter valid choice");
+        }
+    }
+}
+
+output:
+Enter the choice1
+Enter the value12
+Enter the choice1
+Enter the value22
+Enter the choice1
+Enter the value32
+Enter the choice1
+Enter the value42
+Enter the choice2
+Enter the choice3
+Elements in the queue are:
+22
+32
+42
