@@ -150,24 +150,68 @@ void reverse(char infix[],char t[])
     t[q++]='\0';
 }
 
+
+void EvalPostfix(char postfix[])
+{
+    int i;
+    char item;
+    int value;
+    int A, B;
+    for (i = 0; postfix[i] != ')'; i++) 
+    {
+        item = postfix[i];
+        if (isdigit(item)) 
+        {
+            push(item-'0');
+        }
+        else if (item=='+' || item=='-' || item=='*' || item=='/') 
+        {
+            A = pop();
+            B = pop();
+            switch (item) 
+            {
+                case '*':
+                    value = B * A;
+                    break;
+
+                case '/':
+                    value = B / A;
+                    break;
+
+                case '+':
+                    value = B + A;
+                    break;
+
+                case '-':
+                    value = B - A;
+                    break;
+            }
+            push(value);
+        }
+    }
+    printf("Result of expression evaluation : %d \n", pop());
+}
+
+
 void main()
 {
     char infix[size],postfix[size],t[size],prefix[size];
-    printf("Enter the infix expression:\n");
-    gets(infix);
     int choice;
     printf("Enter the choice");
     scanf("%d",&choice);
     switch(choice)
     {
-        case 1:
+        case 1: printf("Enter the infix expression:\n");
+                gets(infix);
                 infix_postfix(infix,postfix);
                 printf("infix expression is:\n(");
                 puts(infix);
                 printf("postfix expression is:\n");
                 puts(postfix);
                 break;
-        case 2: reverse(infix,t);
+        case 2: printf("Enter the infix expression:\n");
+                gets(infix);
+                reverse(infix,t);
                 infix_postfix(t,postfix);
                 reverse(postfix,prefix);
                 printf("infix expression is:\n");
@@ -175,21 +219,39 @@ void main()
                 printf("prefix expression is:\n");
                 puts(prefix);
                 break;
+        case 3: printf("enter postfix expression\n");
+                printf("enter ) to end expression:\n");
+                for (int i=0; i<=size-1; i++) 
+                {
+                    scanf("%c", &postfix[i]);
+                    if (postfix[i] == ')') 
+                    {
+                        break;
+                    }
+                }
+                EvalPostfix(postfix);
     }
 }
 output:
+Enter the choice1
 Enter the infix expression:
 a*b+c
-Enter the choice1
 infix expression is:
 (a*b+c)
 postfix expression is:
 ab*c+
 
+Enter the choice2
 Enter the infix expression:
 a*b+c
-Enter the choice2
 infix expression is:
 a*b+c
 prefix expression is:
 +*abc
+
+Enter the choice3 
+enter postfix expression
+enter ) to end expression:
+34+2*7*
+)
+Result of expression evaluation : 98 
