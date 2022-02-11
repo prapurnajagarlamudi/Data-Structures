@@ -73,7 +73,7 @@ void EvalPostfix(char postfix[])
 
 void main()
 {
-    char infix[size],postfix[size],t[size],prefix[size];
+    char infix[size],postfix[size];
     printf("enter postfix expression\n");
     printf("enter ) to end expression:\n");
     for (int i=0; i<=size-1; i++)
