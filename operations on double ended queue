@@ -1,0 +1,184 @@
+//Double ended queue.
+#include<stdio.h>
+#define size 10
+
+int q[size];
+int rear=-1,front=-1;
+int value;
+
+//Insertion at front.
+void enqueuefront(int value)
+{
+    if(front==0 && rear==size-1 || front==rear+1)
+    {
+        printf("DQueue is full\n");
+    }
+    else if(front==-1 && rear==-1)
+    {
+        front=0;
+        rear=0;
+        q[front]=value;
+    }
+    else if(front==0)
+    {
+        front=size-1;
+        q[front]=value;
+    }
+    else
+    {
+        front--;
+        q[front]=value;
+    }
+}
+
+//Insertion at rear.
+void enqueuerear(int value)
+{
+    if(front==0 && rear==size-1 || front==rear+1)
+    {
+        printf("DQueue is full\n");
+    }
+    else if(rear==-1 && front==-1)
+    {
+        rear=0;
+        q[rear]=value;
+    }
+    else if(rear==size-1)
+    {
+        rear=0;
+        q[rear]=size;
+    }
+    else
+    {
+        rear++;
+        q[rear]=value;
+    }
+}
+
+//Deletion at front.
+void dequeuefront()
+{
+    if(front==-1 && rear==-1)
+    {
+        printf("DQueue is empty\n");
+    }
+    else if(front==rear)
+    {
+        printf("deleted element is %d",q[front]);
+        front=-1;
+        rear=-1;
+    }
+    else if(front==size-1)
+    {
+        printf("deleted element is %d",q[front]);
+        front=0;
+    }
+    else
+    {
+        printf("deleted element is %d",q[front]);
+        front++;
+    }
+}
+
+//Deletion at rear.
+void dequeuerear()
+{
+    if(rear==-1 && front==-1)
+    {
+        printf("DQueue is empty\n");
+    }
+    else if(rear==front)
+    {
+        printf("deleted element is %d",q[rear]);
+        rear=-1;
+        front=-1;
+    }
+    else if(rear==0)
+    {
+        printf("deleted element is %d",q[rear]);
+        rear=0;
+    }
+    else
+    {
+        printf("deleted element is %d",q[rear]);
+        rear--;
+    }
+    
+}
+
+//To display the elements present in the queue.
+void display()
+{
+    for(int i=front;i!=rear;i=(i+1)%size)
+    {
+        printf("q[%d] = %d\n",i,q[i]);
+    }
+    printf("q[%d] = %d",rear,q[rear]);
+}
+
+void main()
+{
+    int choice=0,value;
+    while(choice!=5)
+    {
+        printf("enter the choice\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    printf("enter value to insert\n");
+                    scanf("%d",&value);
+                    enqueuerear(value);
+                    break;
+            case 2:
+                    printf("enter value to insert\n");
+                    scanf("%d",&value);
+                    enqueuefront(value);
+                    break;
+            case 3:
+                    dequeuerear();
+                    break;
+            case 4:
+                    dequeuefront();
+                    break;
+            case 5:
+                    printf("The elements present in DQueue are:\n");
+                    display();
+                    break;
+        }
+    }
+}
+
+output:
+
+enter the choice
+1
+enter value to insert
+12
+enter the choice
+1
+enter value to insert
+22
+enter the choice
+1
+enter value to insert
+321
+enter the choice
+1
+enter value to insert
+42
+enter the choice
+4
+deleted element is 0enter the choice
+2
+enter value to insert
+121
+enter the choice
+3
+deleted element is 42enter the choice
+5
+The elements present in DQueue are:
+q[9] = 121
+q[0] = 12
+q[1] = 22
+q[2] = 321
