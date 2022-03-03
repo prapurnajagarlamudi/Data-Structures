@@ -83,39 +83,33 @@ void main()
         }
     }
 }
-oitput:
+output:
 1-push
 2-pop
 3-display
-Enter choice1
+Enter choice
+1
 Enter the data to insert12
 Item is pushed
-1-push
-2-pop
-3-display
-Enter choice1
+Enter choice
+1
 Enter the data to insert22
 Item is pushed
-1-push
-2-pop
-3-display
-Enter choice1
+Enter choice
+1
 Enter the data to insert32
 Item is pushed
-1-push
-2-pop
-3-display
-Enter choice2
+Enter choice
+2
 Item is poped
-1-push
-2-pop
-3-display
-Enter choice3
+Enter choice
+3
 Elements in the stack are:
 22
 12
-
-
+Enter choice
+4
+Enter valid choice
 
 //operations on stack using arrays
 //last in first out
