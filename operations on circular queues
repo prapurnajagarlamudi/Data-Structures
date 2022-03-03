@@ -81,9 +81,10 @@ void display()
 int main()
 {
     int choice=0;
-    while(choice!=3)
+    printf("1-enqueue\n2-dequeue\n3-display\n");
+    while(choice<4)
     {
-        printf("Enter the choice");
+        printf("Enter the choice\n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -99,21 +100,28 @@ int main()
 
 output:
 
-Enter the choice1
+1-enqueue
+2-dequeue
+3-display
+Enter the choice
+1
 Enter the value to insert
 12
-Enter the choice1
+Enter the choice
+1
 Enter the value to insert
 22
-Enter the choice1
+Enter the choice
+1
 Enter the value to insert
 32
-Enter the choice1
-Enter the value to insert
-42
-Enter the choice2
-Enter the choice3
+Enter the choice
+2
+Enter the choice
+3
 22
 32
-42
 0
+Enter the choice
+4
+
