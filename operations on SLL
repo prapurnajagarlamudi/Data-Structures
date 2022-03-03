@@ -47,7 +47,7 @@ void display()
     }
 }
 
-// insertion at the beginning 
+// insertion at the beginning
 void insert_beg ()
 {
     int value;
@@ -112,7 +112,7 @@ void delete_end ()
     tail=temp;
 }
 
-// deletion at the specified position 
+// deletion at the specified position
 void delete_pos ()
 {
     int pos,i=0;
@@ -154,90 +154,77 @@ void count ()
     temp=temp->next;
     c++;
     }
-    printf("Number of elements is %d",c); 
+    printf("Number of elements is %d",c);
 }
 
 void main ()
 {
     int choice;
-    printf("1-creation\n2display\n3-insert beg\n4-insert end\n5-insert pos\n6-delete beg\n7-delete end\n8-delete pos\n9-reverse\n10-count\n");
-    printf("enter the choice");
-    scanf("%d",&choice);
-    if (choice==1)
+    printf("1-creation\n2display\n3-insert beg\n4-insert end\n5-insert pos\n6-delete beg\n7-delete end\n8-delete pos\n9-reverse\n10-count\nothers-exit\n");
+    while(choice<11)
     {
-    create();
-    }
-    if (choice==2)
-    {
-    create();
-    display();
-    }
-    if (choice==3)
-    {
-    create();
-    printf("Before insertion\n");
-    display();
-    insert_beg();
-    printf("After insertion\n");
-    display();
-    }
-    if (choice==4)
-    {
-    create();
-    printf("Before insertion\n");
-    display();
-    insert_pos();
-    printf("After insertion\n");
-    display();
-    }
-    if (choice==5)
-    {
-    create();
-    printf("Before insertion\n");
-    display();
-    insert_end();
-    printf("After insertion\n");
-    display();
-    }
-    if (choice==6)
-    {
-    create();
-    printf("Before deletion\n");
-    display();
-    delete_beg();
-    printf("After deletion\n");
-    display();
-    }
-    if (choice==7)
-    {
-    create();
-    printf("Before deletion\n");
-    display();
-    delete_pos();
-    printf("After deletion\n");
-    display();
-    }
-    if (choice==8)
-    {
-    create();
-    printf("Before deletion\n");
-    display();
-    delete_end();
-    printf("After deletion\n");
-    display();
-    }
-    if (choice==9)
-    {
-    create();
-    printf("Before reverse\n");
-    display();
-    reverse();
-    printf("After reverse\n");
-    display();
-    }
-    if (choice==10)
-    {
-    create();
-    count();
+        printf("enter the choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: create();
+                   break;
+            case 2: display();
+                   break;
+            case 3: insert_beg();
+                   break;
+            case 4: insert_end();
+                   break;
+            case 5: insert_pos();
+                   break;
+            case 6: delete_beg();
+                   break;
+            case 7: delete_end();
+                   break;
+            case 8: delete_pos();
+                   break;
+            case 9: reverse();
+                    break;
+            case 10: count();
+                   break;
+            default : printf("Enter the valid number");
+        }
     }
 }
+
+output:
+1-creation
+2display
+3-insert beg
+4-insert end
+5-insert pos
+6-delete beg
+7-delete end
+8-delete pos
+9-reverse
+10-count
+others-exit
+
+enter the choice1
+enter the value12
+enter e to exit and c to continuec
+enter the value22
+enter e to exit and c to continuec
+enter the value32
+enter e to exit and c to continuec
+enter the value42
+enter e to exit and c to continuec
+enter the value52
+enter e to exit and c to continuee
+
+enter the choice6
+
+enter the choice7
+
+enter the choice2
+22
+32
+42
+
+enter the choice12
+Enter the valid number
