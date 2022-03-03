@@ -111,19 +111,60 @@ Enter choice
 4
 Enter valid choice
 
+
 //operations on stack using arrays
 //last in first out
 #include<stdio.h>
-#include<stdlib.h>
-#define size 4
-int top=-1,stack[size];
+#define size 10
+
+int stack[size];
+int top=-1;
+
+void push()
+{
+    int item;
+        if(top>size-1)
+        {
+            printf("overflow\n");
+        }
+        else
+        {
+            printf("enter the item to push:\n");
+            scanf("%d",&item);
+            top++;
+            stack[top]=item;
+        }
+}
+
+void pop()
+{
+    if(top<0)
+    {
+        printf("underflow\n");
+    }
+    else
+    {
+        top--;
+    }
+}
+
+void display()
+{
+    int i;
+    printf("The elements in the stack are:\n");
+    for(i=0;i<=top;i++)
+    {
+        printf("%d ",stack[i]);
+    }
+}
+
 void main()
 {
-    int choice,top=0;
-    while(choice!=3)
+    int choice=0;
+    printf("1-push\n2-pop\n3-display\n");
+    while(choice<4)
     {
-        printf("1-push\n2-pop\n3-display\n");
-        printf("Enter choice");
+        printf("enter your choice:\n");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -138,68 +179,29 @@ void main()
     }
 }
 
-void push()
-{
-    if(top==size-1)
-    {
-        printf("overflow");
-    }
-    else
-    {
-        int ele;
-        printf("Enter the element\n");
-        scanf("%d",&ele);
-        top++;
-        stack[top]=ele;
-    }
-}
 
-void pop()
-{
-    if(top==-1)
-    {
-        printf("Underflow\n");
-    }
-    else
-    {
-        top--;
-    }
-}
-
-void display()
-{
-    printf("Elements in the stack are:\n");
-    for(top=0;top<size;top++)
-    {
-        printf("%d\n",stack[top]);
-    }
-}
 output:
-Enter choice1
-Enter the element
+
+1-push
+2-pop
+3-display
+enter your choice:
+1
+enter the item to push:
 12
-1-push
-2-pop
-3-display
-Enter choice1
-Enter the element
+enter your choice:
+1
+enter the item to push:
 22
-1-push
-2-pop
-3-display
-Enter choice1
-Enter the element
+enter your choice:
+1
+enter the item to push:
 32
-1-push
-2-pop
-3-display
-Enter choice2
-1-push
-2-pop
-3-display
-Enter choice3
-Elements in the stack are:
-12
-22
-0
-0
+enter your choice:
+2
+enter your choice:
+3
+The elements in the stack are:
+12 22 enter your choice:
+4
+Enter valid choice
