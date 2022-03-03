@@ -39,3 +39,19 @@ void main ()
         printf("%d\n",a[i]);
     }
 }
+
+output:
+
+enter no of elements
+6
+enter the elements
+1
+3
+2
+4
+6
+5
+elements before sorting are:
+1 3 2 4 6 5
+elements after sorting are:
+1 2 3 4 5 6
