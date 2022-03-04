@@ -1,0 +1,189 @@
+//operations and traversals on binary search trees
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *right_child;
+    struct node *left_child;
+};
+
+struct node* create_node(int x)
+{
+    struct node *p;
+    p = malloc(sizeof(struct node));
+    p->data = x;
+    p->left_child = NULL;
+    p->right_child = NULL;
+    return p;
+}
+
+//insertion
+struct node* insert_node(struct node *root, int x)
+{
+    if(root==NULL)
+        return create_node(x);
+    else if(x>root->data)
+        root->right_child = insert_node(root->right_child, x);
+    else
+        root->left_child = insert_node(root->left_child,x);
+    return root;
+}
+
+//seraching
+struct node* search_node(struct node *root, int x)
+{
+    if(root==NULL || root->data==x)
+        return root;
+    else if(x>root->data)
+        return search_node(root->right_child, x);
+    else
+        return search_node(root->left_child,x);
+}
+
+struct node* find_minimum(struct node *root)
+{
+    if(root == NULL)
+        return NULL;
+    else if(root->left_child != NULL)
+        return find_minimum(root->left_child);
+    return root;
+}
+//deletion
+struct node* delete_node(struct node *root, int x)
+{
+    if(root==NULL)
+        return NULL;
+    if (x>root->data)
+        root->right_child = delete_node(root->right_child, x);
+    else if(x<root->data)
+        root->left_child = delete_node(root->left_child, x);
+    else
+    {
+        //No Children
+        if(root->left_child==NULL && root->right_child==NULL)
+        {
+            free(root);
+            return NULL;
+        }
+        //One Child
+        else if(root->left_child==NULL || root->right_child==NULL)
+        {
+            struct node *temp;
+            if(root->left_child==NULL)
+                temp = root->right_child;
+            else
+                temp = root->left_child;
+            free(root);
+            return temp;
+        }
+        //Two Children
+        else
+        {
+            struct node *temp = find_minimum(root->right_child);
+            root->data = temp->data;
+            root->right_child = delete_node(root->right_child, temp->data);
+        }
+    }
+    return root;
+}
+
+//Traversals
+void inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left_child);
+        printf(" %d ", root->data);
+        inorder(root->right_child);
+    }
+}
+
+void preorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        printf(" %d ", root->data);
+   preorder(root->left_child);
+        preorder(root->right_child);
+    }
+}
+
+void postorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        postorder(root->left_child);
+        postorder(root->right_child);
+   printf(" %d ", root->data);
+    }
+}
+
+void main()
+{
+    int value,i,a[20],b[20],m,n;
+    printf("enter root value\n");
+    scanf("%d",&value);
+    struct node* root=create_node(value);
+    printf("Enter the no of nodes to want to insert");
+    scanf("%d",&m);
+    for(i=0;i<m;i++)
+    {
+        printf("enter value:");
+        scanf("%d",&a[i]);
+        insert_node(root,a[i]);
+    }
+    printf("Enter the no of nodes to delete");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        printf("enter value:");
+        scanf("%d",&b[i]);
+        delete_node(root,b[i]);
+    }
+    int choice;
+    printf("1-inorder\n2-preorder\n3-postorder\n");
+    printf("Enter the choice");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+        case 1: printf("Inorder traversal is:\n");
+                inorder(root);
+                break;
+        case 2: printf("Preorder traversal is:\n");
+                preorder(root);
+                break;
+        case 3: printf("Postoreder traversal is:\n");
+                postorder(root);
+                break;
+        default:printf("Exit");
+    }
+}
+
+output:
+
+enter root value
+10
+Enter the no of nodes to want to insert10
+enter value:1
+enter value:5
+enter value:8
+enter value:4
+enter value:19
+enter value:17
+enter value:14
+enter value:12
+enter value:7
+enter value:11
+Enter the no of nodes to delete3
+enter value:1
+enter value:5
+enter value:8
+1-inorder
+2-preorder
+3-postorder
+Enter the choice1
+Inorder traversal is:
+ 4  7  10  11  12  14  17  19
