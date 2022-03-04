@@ -1,0 +1,130 @@
+//operations and traversals on binary tree
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+}*newnode,*temp;
+
+struct node* create_node(int value)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=value;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    return newnode;
+}
+
+void inorder_traversal(struct node* root)
+{
+    if(root==NULL)
+    {
+        return ;
+    }
+    else
+    {
+        inorder_traversal(root->left);
+        printf("%d ",root->data);
+        inorder_traversal(root->right);
+    }
+}
+
+void preorder_traversal(struct node* root)
+{
+    if(root==NULL)
+    {
+        return ;
+    }
+    else
+    {
+        printf("%d ",root->data);
+        preorder_traversal(root->left);
+        preorder_traversal(root->right);
+    }
+}
+
+void postorder_traversal(struct node* root)
+{
+    if(root==NULL)
+    {
+        return ;
+    }
+    else
+    {
+        postorder_traversal(root->left);
+        postorder_traversal(root->right);
+        printf("%d ",root->data);
+    }
+}
+
+struct node* insert_node(struct node* root,int value)
+{
+
+    if(root==NULL)
+    {
+        return create_node(value);
+    }
+    else if(value > root->data)
+    {
+        root->right=insert_node(root->right,value);
+    }
+    else
+    {
+        root->left=insert_node(root->left,value);
+    }
+    return root;
+}
+
+void main()
+{
+        int value,i,a[10],n;
+        printf("enter root value\n");
+        scanf("%d",&value);
+        struct node* root=create_node(value);
+        printf("Enter the no of nodes");
+        scanf("%d",&n);
+        for(i=0;i<n;i++)
+        {
+                printf("enter value:");
+                scanf("%d",&a[i]);
+                insert_node(root,a[i]);
+        }
+        int choice;
+        printf("1-inorder\n2-preorder\n3-postorder\n");
+        printf("Enter the choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+                case 1: printf("Inorder traversal is:\n");
+                        inorder_traversal(root);
+                        break;
+                case 2: printf("Preorder traversal is:\n");
+                        preorder_traversal(root);
+                        break;
+                case 3: printf("Postoreder traversal is:\n");
+                        postorder_traversal(root);
+                        break;
+                default:printf("Exit");
+         }
+}
+
+output:
+
+enter root value
+20
+Enter the no of nodes5
+enter value:25
+enter value:29
+enter value:3
+enter value:6
+enter value:15
+1-inorder
+2-preorder
+3-postorder
+Enter the choice1
+Inorder traversal is:
+3 6 15 20 25 29
