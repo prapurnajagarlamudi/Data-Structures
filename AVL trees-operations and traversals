@@ -231,16 +231,16 @@ int main()
 
 output:
 
-Enter the no of nodes to want to insert5
-enter value:1
+Enter the no of nodes to want to insert7
 enter value:2
-enter value:3
+enter value:1
+enter value:7
 enter value:4
 enter value:5
+enter value:3
+enter value:8
 
-After insertion: 2 1 4 3 5 
-Enter the no of nodes to delete2
-enter value:1
-enter value:2
+After insertion: 4 2 1 3 7 5 8 Enter the no of nodes to delete1
+enter value:3
 
-After deletion: 4 3 5 
+After deletion: 4 2 1 7 5 8
