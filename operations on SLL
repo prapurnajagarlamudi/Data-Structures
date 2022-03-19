@@ -157,11 +157,30 @@ void count ()
     printf("Number of elements is %d",c);
 }
 
+void sort()
+{
+    int var;
+    struct node* i,*j;
+    temp=head;
+    for(i=temp;i->next!=NULL;i=i->next)
+    {
+        for(j=i->next;j!=NULL;j=j->next)
+        {
+            if(i->data > j->data)
+            {
+                var=i->data;
+                i->data=j->data;
+                j->data=var;
+            }
+        }
+    }
+}
+
 void main ()
 {
-    int choice;
+    int choice=0;
     printf("1-creation\n2display\n3-insert beg\n4-insert end\n5-insert pos\n6-delete beg\n7-delete end\n8-delete pos\n9-reverse\n10-count\nothers-exit\n");
-    while(choice<11)
+    while(choice<12)
     {
         printf("enter the choice");
         scanf("%d",&choice);
@@ -187,6 +206,8 @@ void main ()
                     break;
             case 10: count();
                    break;
+            case 11:sort();
+                    break;
             default : printf("Enter the valid number");
         }
     }
