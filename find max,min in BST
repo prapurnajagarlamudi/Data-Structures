@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+  int data;
+  struct node *left, *right;
+}*newnode,*temp;
+
+struct node *create_node (int value)
+{
+  newnode=(struct node*)malloc(sizeof (struct node));
+  newnode->data = value;
+  newnode->left = NULL;
+  newnode->right = NULL;
+  return newnode;
+}
+
+struct node *insert_node (struct node *root, int value)
+{
+  if (root == NULL)
+    return create_node (value);
+  else if (value > root->data)
+    root->right = insert_node (root->right, value);
+  else
+    root->left = insert_node (root->left, value);
+  return root;
+}
+
+int find_min(struct node* root)
+{
+    temp=root;
+    while(temp->left!=NULL)
+    {
+        temp=temp->left;
+    }
+    return temp->data;
+}
+
+int find_max(struct node* root)
+{
+    temp=root;
+    while(temp->right!=NULL)
+    {
+        temp=temp->right;
+    }
+    return temp->data;
+}
+
+void main()
+{
+    int value,i,a[20],b[20],m,n,temp1,temp2;
+    printf("enter root value\n");
+    scanf("%d",&value);
+    struct node* root=create_node(value);
+    printf("Enter the no of nodes to want to insert");
+    scanf("%d",&m);
+    for(i=0;i<m;i++)
+    {
+        printf("enter value:");
+        scanf("%d",&a[i]);
+        insert_node(root,a[i]);
+    }
+    
+    int choice;
+    printf("1-max\n2-min\n3-postorder\n");
+    printf("Enter the choice");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+        case 1: temp1=find_max(root);
+                printf("%d\n",temp->data);
+                break;
+        case 2: temp2=find_min(root);
+                printf("%d\n",temp->data);
+                break;
+        default:printf("Exit");
+    }
+}
+
+output:
+
+enter root value
+11
+Enter the no of nodes to want to insert5
+enter value:12
+enter value:32
+enter value:43
+enter value:123
+enter value:54
+1-max
+2-min
+Enter the choice1
+123
