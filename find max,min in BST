@@ -69,10 +69,10 @@ void main()
     switch(choice)
     {
         case 1: temp1=find_max(root);
-                printf("%d\n",temp->data);
+                printf("%d\n",temp1->data);
                 break;
         case 2: temp2=find_min(root);
-                printf("%d\n",temp->data);
+                printf("%d\n",temp2->data);
                 break;
         default:printf("Exit");
     }
