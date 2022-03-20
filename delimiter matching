@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<string.h>
+int top=-1;
+#define n 10
+char a[n];
+void push(char c)
+{
+        if(top==n)
+        {
+                printf("stack overflow");
+        }
+        else
+        {
+
+                a[++top]=c;
+        }
+}
+char pop()
+{
+        char t;
+        if(top<0)
+        {
+                printf("stack underflow");
+        }
+        else
+        {
+            return a[top--];
+        }
+}
+void main()
+{
+    char e[20],x, c;
+    int flag=1, i=0;
+    printf ("enter expression to find the delimiter match:\n");
+    scanf("%s",e);
+    printf("%s",e);
+    c=e[i];
+    while(c!='\0')
+    {
+        if(c=='('||c=='['||c=='{')
+            push(c);
+        else if(c==')'||c==']'||c=='}')
+        {
+            if(top==-1)
+            {
+                flag=0;
+            }
+            else
+            {
+                x=pop();
+                if(c==')'&&(x=='{'||x=='{'))
+                    flag=0;
+                else if(c=='}'&&(x=='('||x=='['))
+                    flag=0;
+                else if(c==']'&&(x=='{'||x=='('))
+                    flag=0;
+            }
+        }
+        i=i+1;
+        c=e[i];
+    }
+    if(top>=0)
+    {
+        flag=0;
+    }
+    if(flag==1)
+    {
+        printf("delimiter matches");
+    }
+    else if(flag==0)
+    {
+        printf("delimiter does not match");
+    }
+}
+
+output:
+
+enter expression to find the delimiter match:
+(({}))  
+(({}))delimiter matches
