@@ -1,0 +1,126 @@
+//program to multiply two polynomials
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+        int coeff;
+        int expo;
+        struct node *next;
+}*newnode,*temp,*temp1,*temp2,*head3=NULL;
+struct node *head=NULL;
+struct node *tail=NULL;
+struct node* create(struct node *head)
+{
+        int c,e,ch;
+        do
+        {
+                newnode=(struct node*)malloc(sizeof(struct node));
+                printf("enter coefficient:\n");
+                scanf("%d",&c);
+                printf("enter exponentiation:\n");
+                scanf("%d",&e);
+                newnode->coeff=c;
+                newnode->expo=e;
+                newnode->next=NULL;
+                if(head==NULL)
+                {
+                        head=newnode;
+                        tail=newnode;
+                }
+                else
+                {
+                        tail->next=newnode;
+                        tail=newnode;
+                }
+                printf("press 1 to continue and others to exit\n");
+                fflush(stdin);
+                scanf("%d",&ch);
+        }
+        while(ch==1);
+        return head;
+}
+void display(struct node *head)
+{
+        temp=head;
+        while(temp!=NULL)
+        {
+                printf("+%dx^%d",temp->coeff,temp->expo);
+                temp=temp->next;
+        }
+}
+struct node* mul_poly(struct node *head1,struct node *head2)
+{
+    int value=0;
+        temp1=head1;
+        while(temp1!=NULL)
+        {
+                temp2=head2;
+                while(temp2!=NULL)
+                {
+                    newnode=(struct node*)malloc(sizeof(struct node));
+                    newnode->coeff=temp1->coeff*temp2->coeff;
+                    newnode->expo=temp1->expo+temp2->expo;
+                    newnode->next=NULL;
+                    if(head3==NULL)
+                    {
+                        head3=newnode;
+                        tail=newnode;
+                    }
+                    else
+                    {
+                        tail->next=newnode;
+                        tail=newnode;
+                    }
+                    temp2=temp2->next;
+                }
+                temp1=temp1->next;
+        }
+        temp1=head3;
+        while(temp1!=NULL)
+        {
+            temp1=temp1->next;
+        }
+
+}
+int main()
+{
+        int choice=0;
+        struct node *head1=NULL;
+        struct node *head2=NULL;
+        struct node *a;
+        struct node *b;
+       while(choice<4)
+       {
+               printf("\nmultiplication of two polynomials\n");
+               printf("1.create 1st polynomial\n");
+               printf("2.create 2nd polynomial\n");
+               printf("3.display 1st polynomial\n");
+              printf("4.display 2nd polynomial\n");
+              printf("5.multiplication\n");
+         printf("enter your choice:\n");
+         scanf("%d",&choice);
+         switch(choice)
+          {
+                 case 1:
+                         printf("enter 1st polynomial\n");
+                         a=create(head1);
+                         break;
+                case 2:
+                         printf("enter 2nd polynomial\n");
+                         b=create(head2);
+                         break;
+                case 3:
+                         printf("1st polynomial is:\n");
+                         display(a);
+                         break;
+                case 4:
+                         printf("2nd polynomial is:\n");
+                         display(b);
+                         break;
+                case 5:
+                         printf("multiplied polynomial is:\n");
+                         mul_poly(a,b);
+                         break;
+         }
+        }
+}
